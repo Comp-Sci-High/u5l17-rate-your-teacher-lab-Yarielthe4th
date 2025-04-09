@@ -1,17 +1,20 @@
 // Add an event listener to the form that upon submits creates a new teacher
 // When the teacher is created redirect to the teachers page
-const createForm = document.querySelector(“form”)
+const createForm = document.querySelector("form")
 
-createForm.addEventListener(“submit”, async (e)=>{
+createForm.addEventListener("submit", async (e)=>{
 	e.preventDefault()
-	const bookData = new FormData(createForm)
-	const reqBody = Object.fromEntries(bookData)
+	const teacherData = new FormData(createForm)
+	const reqBody = Object.fromEntries(teacherData)
 
-	const response = await fetch(“/add”, {
-		method: “POST”,
+	const response = await fetch("/add/teacher", {
+		method: "POST",
 		headers: {
-			“Content-Type”: “application/json”)
+			"Content-Type":("application/json")
 		},
 		body: JSON.stringify(reqBody)
 	})
+	const data = await response.JSON()
+    console.log(data)
+	window.location.href = "/"
 })
